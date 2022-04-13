@@ -3,14 +3,11 @@
 echo "Hello there, this is a PHP Apache container";
 
 $host = 'db';
-
 $user = 'MYSQL_USER';
-
-
 $pass = 'MYSQL_PASSWORD';
-
-
 $mydatabase = 'MYSQL_DATABASE';
+
+
 // MySQL Connection 
 $conn = new mysqli($host, $user, $pass, $mydatabase);
 
