@@ -1,0 +1,6 @@
+docker-compose build
+docker-compose up
+#docker run -it -d -P -e MYSQL_ROOT_PASWWORD=MYSQL_ROOT_PASWWORD -e MYSQL_DATABASE=MYSQL_DATABASE -e MYSQL_USER=MYSQL_USER -e MYSQL_PASSWORD=MYSQL_PASSWORD mysql
+#docker run -it -d -P phpmyadmin/phpmyadmin
+
+test
