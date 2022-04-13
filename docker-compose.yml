@@ -28,6 +28,8 @@ services:
             MYSQL_PASSWORD: MYSQL_PASSWORD
         ports:
             - "9906:3306"
+        volumes:
+            - mysql:/var/lib/mysql 
          
     mongo:
       image: mongo:5.0
@@ -39,5 +41,8 @@ services:
       ports:
         - "27017:27017"
       volumes:
-        - ./db:/data/db
-     
+        - mongo-db:/data/db
+
+volumes:
+    mysql:
+    mongo-db:

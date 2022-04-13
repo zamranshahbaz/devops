@@ -1,4 +1,5 @@
 <?php
+// MySQL Insert and Retrieve
 echo "Hello there, this is a PHP Apache container";
 
 $host = 'db';
@@ -46,21 +47,40 @@ else{
 		echo "<br>";
 	}
 }
+
+
+
 echo "<br>";
 // Mongo Connection
+// Bulk Insert and retrieve 
+
 try {
 	
-	$m =  new MongoDB\Driver\Manager("mongodb://root:password@mongo:27017");
+	$manager =  new MongoDB\Driver\Manager("mongodb://root:password@mongo:27017");
 	echo "Connection to database successfully";
 	
-	$filter = ['id' => 1];
-	 $options = [
-    'projection' => ['_id' => 0],
- 	];
-	 $query = new MongoDB\Driver\Query($filter, $options);
- 	$rows = $m->executeQuery('db.testCol', $query); 
-	 print_r($rows->toArray());
 
+
+	 $bulk = new MongoDB\Driver\BulkWrite;
+	 $bulk->insert(['x' => 1]);
+	 $bulk->insert(['x' => 2]);
+	 $bulk->insert(['x' => 3]);
+	 $manager->executeBulkWrite('db.collection', $bulk);
+	 
+	 $filter = ['x' => ['$gt' => 1]];
+	 $options = [
+			 'projection' => ['_id' => 0],
+			 'sort' => ['x' => -1],
+	 ];
+	 
+	 $query = new MongoDB\Driver\Query($filter, $options);
+	 $cursor = $manager->executeQuery('db.collection', $query);
+	 
+	 foreach ($cursor as $document) {
+			 var_dump($document);
+	 }
+
+	 
 
 
 }
